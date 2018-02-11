@@ -10,8 +10,8 @@ import keras
 # and window-size into a set of input/output pairs for use with our RNN model
 def window_transform_series(series, window_size):
     # containers for input/output pairs
-    X = []
-    y = []
+    X = [series[i:i+window_size] for i in range(0, len(series) - window_size)]
+    y = series[window_size:]
 
     # reshape each 
     X = np.asarray(X)
