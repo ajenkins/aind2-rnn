@@ -1,4 +1,6 @@
+import re
 import numpy as np
+from string import ascii_lowercase
 
 from keras.models import Sequential
 from keras.layers import Dense
@@ -32,6 +34,10 @@ def build_part1_RNN(window_size):
 ### TODO: return the text input with only ascii lowercase and the punctuation given below included.
 def cleaned_text(text):
     punctuation = ['!', ',', '.', ':', ';', '?']
+    valid_chars = ascii_lowercase + ''.join(punctuation)
+    regex = re.compile("[^{}]".format(valid_chars))
+    # Adapted from https://stackoverflow.com/a/15754650/1494777
+    text = re.sub(regex, ' ', text)
 
     return text
 
